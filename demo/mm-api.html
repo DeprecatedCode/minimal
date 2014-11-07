@@ -1,0 +1,35 @@
+<!doctype html>
+<head>
+    <template class="mm">
+layout
+    header
+        logo
+    body
+        section.first
+            title
+            body
+        section.second
+            title
+            body
+
+content
+    header logo 'Example
+
+style
+    header logo 'font-size: 50px
+        :hover
+            'color: red
+    </template>
+
+    <script src="../src/mm.js"></script>
+    <script>
+        var template = document.querySelector('template.mm').innerHTML;
+        var rendered = mm(template);
+        window.onload = function () {
+            document.body.appendChild(rendered.root);
+            document.head.appendChild(rendered.style);
+        };
+    </script>
+</head>
+<body>
+</body>
