@@ -1,5 +1,21 @@
-var mm = function (template) {
-    var tree = mm.parse(template);
+/**
+ * Autoload if template.mm found
+ */
+this.onload = function () {
+    var template = document.querySelector('template.mm');
+    if (template) {
+        var rendered = mm(template);
+        document.body.appendChild(rendered.root);
+        document.head.appendChild(rendered.style);
+    }
+};
+
+/**
+ * Parse a template or string and return
+ * {root: <#document-fragment>, style: <style>}
+ */
+var mm = this.mm = function (template) {
+    var tree = mm.parse(template.innerHTML || template);
 
     var doc = document.createDocumentFragment();
     var style = document.createElement('style');
@@ -28,12 +44,15 @@ var mm = function (template) {
     return {root: doc, style: style};
 };
 
+/**
+ * Add layout to a document, from a minimal node
+ */
 mm.layout = function (doc, node) {
     if (Array.isArray(node.children)) {
         node.children.forEach(function (child) {
             if (child.type === 'node') {
                 var el = document.createElement('div');
-                el.classList.add(child.value);
+                el.classList.add.apply(el.classList, child.value.replace('.', ' .').split(' '));
                 doc.appendChild(el);
                 mm.layout(el, child);
             }
@@ -45,6 +64,9 @@ mm.layout = function (doc, node) {
     }
 };
 
+/**
+ * Add content to a document, from a minimal node
+ */
 mm.content = function (doc, node) {
     if (Array.isArray(node.children)) {
         node.children.forEach(function (child) {
@@ -55,8 +77,12 @@ mm.content = function (doc, node) {
             }
 
             else {
+                var selector = child.value.replace('.', '.\\.');
+                if (selector.substr(0, 1) != '.') {
+                    selector = '.' + selector;
+                }
                 var els = Array.prototype.slice.apply(
-                    doc.querySelectorAll('.' + child.value.replace('.', '\\.'))
+                    doc.querySelectorAll(selector)
                 );
                 els.forEach(function (el) {
                     mm.content(el, child);
@@ -66,14 +92,41 @@ mm.content = function (doc, node) {
     }
 };
 
-mm.style = function (style, node) {
-    ;
+/**
+ * Add style to a style tag, from a minimal node
+ */
+mm.style = function (style, node, root) {
+    if (!root) {
+        root = '';
+    }
+    if (Array.isArray(node.children)) {
+        node.children.forEach(function (child) {
+            if (child.type === 'string') {
+                style.innerText = style.innerText + '\nbody ' + root + ' { ' + child.value + '; }';
+            }
+
+            else {
+                var selector = root;
+                var next = child.value.replace('.', '.\\.');
+                if (next.substr(0, 1) == ':') {
+                    selector = root + next;
+                }
+                else {
+                    selector = root + ' .' + next;
+                }
+                mm.style(style, child, selector);
+            }
+        });
+    }
 };
 
+/**
+ * Parse a minimal string and return the node tree
+ */
 mm.parse = function (template) {
     var tree = {type: 'node', value: null, indent: -1};
     var node = tree;
-
+    var siblings = []; // USE THIS TO ADD a, b to a collection before processing children for each, link to same children array []!!!!!!!!!!!!!!!!!!!!!!!!!!
     template.split('\n').forEach(function (line) {
         var indentMatch = line.match(/^\s*/);
         var valueMatch = line.match(/\S.*?\s*$/);
@@ -133,7 +186,7 @@ mm.parse = function (template) {
             /**
              * Add nodes to the tree
              */
-            nodes.forEach(function (newNode) {
+            nodes.forEach(function (newNode) {console.log(newNode.value);
                 newNode.indent = indent;
                 var parent = node;
                 newNode.getParent = function () {
