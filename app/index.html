@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+    <head>
+        <title>App Responsive Test</title>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <link href='/app/font/typicons.min.css' rel='stylesheet' type='text/css' />
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                overflow: hidden;
+                font-size: 24px;
+            }
+
+            section[class^="layout-"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                overflow: hidden;
+            }
+
+            section.layout-header {
+                bottom: auto;
+                height: 50px;
+                background: rgba(0, 0, 0, 0.75);
+                color: #eee;
+            }
+
+            section.layout-main {
+                padding: 50px 0 0;
+                overflow: auto;
+            }
+
+            section.layout-hero {
+                height: 150px;
+                bottom: auto;
+                background: #ace;
+            }
+
+            section.layout-toolbar {
+                top: 150px;
+                bottom: auto;
+                height: 50px;
+            }
+
+            section.layout-area {
+                padding-top: 150px;
+                min-height: 100%;
+                position: relative;
+            }
+
+            section.layout-content {
+                top: 201px;
+                padding: 25px;
+                text-align: center;
+                overflow: auto;
+            }
+
+            .item {
+                display: none;
+            }
+
+            .display-grid .item {
+                background: #f6f5f4;
+                display: inline-block;
+                margin: 25px;
+                box-sizing: border-box;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                border-radius: 2px;
+                min-height: 200px;
+                max-height: 400px;
+                overflow: auto;
+                width: 200px;
+            }
+
+            .display-list .item {
+                display: block;
+                margin: 25px;
+                box-sizing: border-box;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .display-list .item:last-of-type {
+                border-bottom: none;
+            }
+
+            .button.typcn {
+                line-height: 48px;
+            }
+
+            .button.typcn.typcn-mail {
+                line-height: 46px;
+            }
+
+            .button.typcn::before {
+                display: inline-block;
+                width: 50px;
+            }
+
+            .button {
+                box-sizing: border-box;
+            }
+
+            section.layout-top, section.layout-toolbar {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+                border-top: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .button.right {
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .button.left {
+                border-right: 1px solid rgba(0, 0, 0, 0.2);
+            }
+
+            .button:active {
+                background: rgba(0, 0, 0, 0.25);
+            }
+
+            .button {
+                display: inline-block;
+                height: 50px;
+                width: 50px;
+            }
+
+            .button.selected {
+                color: #5bf;
+            }
+
+            .right {
+                float: right;
+            }
+        </style>
+        <script type="text/javascript">
+            var ready = [];
+            window.onload = function () {
+                ready.forEach(function (fn) {
+                    fn();
+                });
+            };
+        </script>
+        <script>
+            function initialize() {
+              var mapOptions = {
+                zoom: 7,
+                center: new google.maps.LatLng(34.397, -117.644),
+                disableDefaultUI: true
+              };
+
+              var map = new google.maps.Map(document.getElementById('map-canvas'),
+                  mapOptions);
+            }
+
+            function loadScript() {
+              var script = document.createElement('script');
+              script.type = 'text/javascript';
+              script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+                  'callback=initialize';
+              document.body.appendChild(script);
+            }
+
+            ready.push(loadScript);
+        </script>
+        <script type="text/javascript">
+            function selectDisplay(disp) {
+                var not = disp == 'list' ? 'grid' : 'list';
+                var x = document.getElementById.bind(document);
+                x('select-display-' + not).classList.remove('selected');
+                x('select-display-' + disp).classList.add('selected');
+                x('content').classList.remove('display-' + not);
+                x('content').classList.add('display-' + disp);
+            }
+            ready.push(selectDisplay.bind(null, 'grid'));
+        </script>
+    </head>
+    <body>
+        <section class="layout-main">
+            <section class="layout-area">
+                <section class="layout-hero">
+                    <section class="layout-map" id="map-canvas"></section>
+                </section>
+
+                <section id="content" class="layout-content">
+
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+
+                </section>
+
+                <section class="layout-toolbar">
+                    <span class="typcn typcn-chevron-left button left"></span>
+                    <span class="typcn typcn-filter button right"></span>
+                    <span onclick="selectDisplay('grid')" id="select-display-grid" class="typcn typcn-th-large button right"></span>
+                    <span onclick="selectDisplay('list')" id="select-display-list" class="typcn typcn-th-list button right"></span>
+                </section>
+            </section>
+        </section>
+        <section class="layout-header">
+            <span class="typcn typcn-th-menu button left"></span>
+            <span class="typcn typcn-bell button right"></span>
+            <span class="typcn typcn-mail button right"></span>
+        </section>
+    </body>
+</html>
