@@ -164,6 +164,7 @@
             }
 
             .button {
+                position: relative;
                 display: inline-block;
                 height: 50px;
                 width: 50px;
@@ -239,7 +240,7 @@
                 background: rgba(255, 255, 255, 0.2);
             }
 
-            section.layout-modal-content, section.layout-menu-content {
+            section.layout-modal-content {
                 box-shadow: 0 0 20px #000;
                 overflow: auto;
             }
@@ -280,6 +281,33 @@
             body.open-menu-app section.layout-header .typcn-th-menu {
                 background: rgba(0, 0, 0, 0.7);
                 color: #5bf;
+            }
+
+            body.device-ios .counter {
+                left: 1px;
+                top: -3px;
+            }
+
+            .counter {
+                position: absolute;
+                top: -2px;
+                left: 0;
+                right: 0;
+                line-height: 12px;
+                text-align: center;
+            }
+
+            .counter .value {
+                margin: 0 auto;
+                display: inline-block;
+                padding: 5px 5px 4px;
+                border-radius: 5px;
+                width: auto;
+                font-size: 12px;
+                background: #a00;
+                min-width: 9px;
+                text-align: center;
+                color: #fff;
             }
         </style>
         <script type="text/javascript">
@@ -346,8 +374,8 @@
             function selectDisplay(disp) {
                 var not = disp == 'list' ? 'grid' : 'list';
                 var x = document.getElementById.bind(document);
-                x('select-display-' + not).classList.remove('hide');
-                x('select-display-' + disp).classList.add('hide');
+                x('select-display-' + not).classList.add('hide');
+                x('select-display-' + disp).classList.remove('hide');
                 x('content').classList.remove('display-' + not);
                 x('content').classList.add('display-' + disp);
             }
@@ -407,8 +435,8 @@
 
                     <span onclick="contentResize('maximise')" id="content-maximise" class="typcn typcn-arrow-maximise button right"></span>
                     <span class="typcn typcn-filter button right"></span>
-                    <span onclick="selectDisplay('grid')" id="select-display-grid" class="hide typcn typcn-th-large button right"></span>
-                    <span onclick="selectDisplay('list')" id="select-display-list" class="hide typcn typcn-th-list button right"></span>
+                    <span onclick="selectDisplay('list')" id="select-display-grid" class="hide typcn typcn-th-large button right"></span>
+                    <span onclick="selectDisplay('grid')" id="select-display-list" class="hide typcn typcn-th-list button right"></span>
                 </section>
 
                 <section id="content" class="layout-content">
@@ -436,8 +464,12 @@
         <section class="layout-header">
             <span onclick="openMenu('app')" class="typcn typcn-th-menu button left"></span>
             <span onclick="openMenu('user')" class="typcn typcn-user button right"></span>
-            <span onclick="openMenu('notifications')" class="typcn typcn-bell button right"></span>
-            <span onclick="openMenu('messages')" class="typcn typcn-mail button right"></span>
+            <span onclick="openMenu('notifications')" class="typcn typcn-bell button right">
+                <div class="counter"><div class="value">12</div></div>
+            </span>
+            <span onclick="openMenu('messages')" class="typcn typcn-mail button right">
+                <div class="counter"><div class="value">3</div></div>
+            </span>
         </section>
 
         <!-- <section class="layout-modal">
