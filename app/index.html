@@ -11,7 +11,11 @@
                 padding: 0;
                 height: 100%;
                 overflow: hidden;
-                font-size: 24px;
+            }
+
+            body, input, textarea {
+                font-family: Roboto, sans-serif;
+                font-size: 18px;
             }
 
             section[class^="layout-"] {
@@ -24,15 +28,29 @@
             }
 
             section.layout-header {
-                bottom: auto;
                 height: 50px;
-                background: rgba(0, 0, 0, 0.75);
+                bottom: auto;
+                background: rgba(0, 0, 0, 0.7);
+            }
+
+            section.layout-header, section.layout-menu-content {
                 color: #eee;
+            }
+
+            body.content-maximise section.layout-header,
+            body.content-maximise section.layout-hero,
+            body.content-maximise section.layout-toolbar {
+                display: none;
             }
 
             section.layout-main {
                 padding: 50px 0 0;
                 overflow: auto;
+            }
+
+            body.content-maximise section.layout-main {
+                padding: 0;
+                overflow: hidden;
             }
 
             section.layout-hero {
@@ -47,6 +65,10 @@
                 height: 50px;
             }
 
+            section.layout-toolbar, section.layout-header, #content-minimise {
+                font-size: 24px;
+            }
+
             section.layout-area {
                 padding-top: 150px;
                 min-height: 100%;
@@ -54,10 +76,18 @@
             }
 
             section.layout-content {
-                top: 201px;
-                padding: 25px;
+                top: 202px;
+                padding: 10px;
                 text-align: center;
                 overflow: auto;
+            }
+
+            body.content-maximise section.layout-content {
+                top: 0;
+            }
+
+            body.content-maximise section.layout-area {
+                padding-top: 0;
             }
 
             .item {
@@ -67,20 +97,22 @@
             .display-grid .item {
                 background: #f6f5f4;
                 display: inline-block;
-                margin: 25px;
+                margin: 10px;
                 box-sizing: border-box;
                 border: 1px solid rgba(0, 0, 0, 0.2);
                 border-radius: 2px;
-                min-height: 200px;
-                max-height: 400px;
+                min-height: 280px;
+                max-height: 560px;
                 overflow: auto;
-                width: 200px;
+                width: 280px;
             }
 
             .display-list .item {
                 display: block;
-                margin: 25px;
+                margin: 10px 10px 0;
+                padding-bottom: 10px;
                 box-sizing: border-box;
+                min-height: 50px;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.2);
             }
 
@@ -96,6 +128,10 @@
                 line-height: 46px;
             }
 
+            body.device-ios .button.typcn {
+                line-height: 41px;
+            }
+
             .button.typcn::before {
                 display: inline-block;
                 width: 50px;
@@ -108,6 +144,7 @@
             section.layout-top, section.layout-toolbar {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.2);
                 border-top: 1px solid rgba(0, 0, 0, 0.2);
+                overflow: visible;
             }
 
             .button.right {
@@ -122,6 +159,10 @@
                 background: rgba(0, 0, 0, 0.25);
             }
 
+            .button.left.typcn-zoom-outline {
+                border-right: none;
+            }
+
             .button {
                 display: inline-block;
                 height: 50px;
@@ -132,8 +173,113 @@
                 color: #5bf;
             }
 
+            .button.disabled {
+                color: #ddd;
+            }
+
+            section.layout-content-filter {
+                left: 49px;
+                right: 149px;
+                overflow: visible;
+            }
+
+            #content-filter {
+                position: absolute;
+                border: none;
+                margin: 0;
+                padding: 9px 9px 9px 44px;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                box-sizing: border-box;
+                background: transparent;
+                font-size: 18px;
+            }
+
+            .left {
+                float: left;
+            }
+
             .right {
                 float: right;
+            }
+
+            .hide {
+                display: none;
+            }
+
+            #content-minimise {
+                display: none;
+                position: fixed;
+                right: 0px;
+                top: -4px;
+                padding: 0 0 15px 15px;
+            }
+
+            body.device-ios #content-minimise {
+                top: -8px;
+                right: -2px;
+            }
+
+            body.content-maximise #content-minimise {
+                display: block;
+            }
+
+            body.content-maximise #content-maximise {
+                display: none;
+            }
+
+            section.layout-modal, section.layout-menu {
+                display: none;
+                overflow: visible;
+            }
+
+            section.layout-modal {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            section.layout-modal-content, section.layout-menu-content {
+                box-shadow: 0 0 20px #000;
+                overflow: auto;
+            }
+
+            section.layout-menu {
+                top: 50px;
+                background: rgba(0, 0, 0, 0.9);
+            }
+
+            section.layout-modal-content {
+                background: #fff;
+                top: 65px;
+                left: 15px;
+                bottom: 15px;
+                right: 15px;
+                border-radius: 2px;
+            }
+
+            body.open-menu-user section.layout-menu#menu-user {
+                display: block;
+            }
+
+            body.open-menu-notifications section.layout-menu#menu-notifications {
+                display: block;
+            }
+
+            body.open-menu-messages section.layout-menu#menu-messages {
+                display: block;
+            }
+
+            body.open-menu-app section.layout-menu#menu-app {
+                display: block;
+            }
+
+            body.open-menu-user section.layout-header .typcn-user,
+            body.open-menu-notifications section.layout-header .typcn-bell,
+            body.open-menu-messages section.layout-header .typcn-mail,
+            body.open-menu-app section.layout-header .typcn-th-menu {
+                background: rgba(0, 0, 0, 0.7);
+                color: #5bf;
             }
         </style>
         <script type="text/javascript">
@@ -143,6 +289,34 @@
                     fn();
                 });
             };
+
+            var isMobile = {
+                Android: function() {
+                    return /Android/i.test(navigator.userAgent);
+                },
+                BlackBerry: function() {
+                    return /BlackBerry/i.test(navigator.userAgent);
+                },
+                iOS: function() {
+                    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+                },
+                Windows: function() {
+                    return /IEMobile/i.test(navigator.userAgent);
+                },
+                any: function() {
+                    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+                }
+            };
+
+            ready.push(function () {
+                if (isMobile.Android()) {
+                    document.body.classList.add('device-android');
+                }
+
+                if (isMobile.iOS()) {
+                    document.body.classList.add('device-ios');
+                }
+            });
         </script>
         <script>
             function initialize() {
@@ -167,15 +341,53 @@
             ready.push(loadScript);
         </script>
         <script type="text/javascript">
+            var menus = ['app', 'messages', 'user', 'notifications'];
+
             function selectDisplay(disp) {
                 var not = disp == 'list' ? 'grid' : 'list';
                 var x = document.getElementById.bind(document);
-                x('select-display-' + not).classList.remove('selected');
-                x('select-display-' + disp).classList.add('selected');
+                x('select-display-' + not).classList.remove('hide');
+                x('select-display-' + disp).classList.add('hide');
                 x('content').classList.remove('display-' + not);
                 x('content').classList.add('display-' + disp);
             }
             ready.push(selectDisplay.bind(null, 'grid'));
+
+            function contentResize(size) {
+                var not = size == 'maximise' ? 'minimise' : 'maximise';
+                document.body.classList.remove('content-' + not);
+                document.body.classList.add('content-' + size);
+            }
+
+            function contentFilter(clear) {
+                var b = document.getElementById('content-back');
+                var x = document.getElementById('content-filter');
+                if (clear) {
+                    x.value = '';
+                }
+                setTimeout(function () {
+                    if (x.value.length) {
+                        b.classList.remove('disabled');
+                    }
+                    else {
+                        b.classList.add('disabled');
+                    }
+                });
+            }
+
+            ready.push(contentFilter);
+
+            function openMenu(name) {
+                if (document.body.classList.contains('open-menu-' + name)) {
+                    name = null;
+                }
+                menus.forEach(function (n) {
+                    document.body.classList.remove('open-menu-' + n);
+                });
+                if (name) {
+                    document.body.classList.add('open-menu-' + name);
+                }
+            };
         </script>
     </head>
     <body>
@@ -183,6 +395,20 @@
             <section class="layout-area">
                 <section class="layout-hero">
                     <section class="layout-map" id="map-canvas"></section>
+                </section>
+
+                <section class="layout-toolbar">
+                    <span class="typcn typcn-chevron-left button left disabled" id="content-back" onclick="contentFilter(true)"></span>
+
+                    <span class="typcn typcn-zoom-outline button left disabled"></span>
+                    <section class="layout-content-filter">
+                        <input id="content-filter" onkeypress="contentFilter()" onkeyup="contentFilter()" onchange="contentFilter()" placeholder="Filter"></input>
+                    </section>
+
+                    <span onclick="contentResize('maximise')" id="content-maximise" class="typcn typcn-arrow-maximise button right"></span>
+                    <span class="typcn typcn-filter button right"></span>
+                    <span onclick="selectDisplay('grid')" id="select-display-grid" class="hide typcn typcn-th-large button right"></span>
+                    <span onclick="selectDisplay('list')" id="select-display-list" class="hide typcn typcn-th-list button right"></span>
                 </section>
 
                 <section id="content" class="layout-content">
@@ -204,18 +430,39 @@
 
                 </section>
 
-                <section class="layout-toolbar">
-                    <span class="typcn typcn-chevron-left button left"></span>
-                    <span class="typcn typcn-filter button right"></span>
-                    <span onclick="selectDisplay('grid')" id="select-display-grid" class="typcn typcn-th-large button right"></span>
-                    <span onclick="selectDisplay('list')" id="select-display-list" class="typcn typcn-th-list button right"></span>
-                </section>
+                <span onclick="contentResize('minimise')" id="content-minimise" class="typcn typcn-arrow-minimise"></span>
             </section>
         </section>
         <section class="layout-header">
-            <span class="typcn typcn-th-menu button left"></span>
-            <span class="typcn typcn-bell button right"></span>
-            <span class="typcn typcn-mail button right"></span>
+            <span onclick="openMenu('app')" class="typcn typcn-th-menu button left"></span>
+            <span onclick="openMenu('user')" class="typcn typcn-user button right"></span>
+            <span onclick="openMenu('notifications')" class="typcn typcn-bell button right"></span>
+            <span onclick="openMenu('messages')" class="typcn typcn-mail button right"></span>
+        </section>
+
+        <!-- <section class="layout-modal">
+            <section class="layout-modal-content">
+            </section>
+        </section> -->
+
+        <section class="layout-menu" id="menu-app">
+            <section class="layout-menu-content">
+            </section>
+        </section>
+
+        <section class="layout-menu" id="menu-messages">
+            <section class="layout-menu-content">
+            </section>
+        </section>
+
+        <section class="layout-menu" id="menu-notifications">
+            <section class="layout-menu-content">
+            </section>
+        </section>
+
+        <section class="layout-menu" id="menu-user">
+            <section class="layout-menu-content">
+            </section>
         </section>
     </body>
 </html>
