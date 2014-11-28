@@ -1,0 +1,244 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.hide {
+  display: none !important;
+}
+body,
+input,
+textarea {
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+}
+section[class^="layout-"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+[data-menu] {
+  display: none;
+}
+[data-menu].active {
+  display: block;
+}
+[data-menu-button].active {
+  background: rgba(0, 0, 0, 0.7);
+  color: #55bbff;
+}
+.button {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+}
+.button.typcn {
+  line-height: 48px;
+}
+body.device-ios .button.typcn {
+  line-height: 41px;
+}
+.button.typcn.typcn-mail {
+  line-height: 46px;
+}
+.button.typcn::before {
+  display: inline-block;
+  width: 50px;
+}
+.button:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+.button.active {
+  color: #55bbff;
+}
+.button.disabled {
+  color: #dddddd;
+}
+.counter {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  line-height: 12px;
+  text-align: center;
+}
+body.device-ios .counter {
+  left: 1px;
+  top: -3px;
+}
+.counter .value {
+  margin: 0 auto;
+  display: inline-block;
+  padding: 5px 5px 4px;
+  border-radius: 5px;
+  width: auto;
+  font-size: 12px;
+  background: #a00;
+  min-width: 9px;
+  text-align: center;
+  color: #fff;
+}
+section.layout-header {
+  height: 50px;
+  bottom: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #eeeeee;
+}
+section.layout-main {
+  padding: 50px 0 0;
+  overflow: auto;
+}
+section.layout-hero {
+  height: 150px;
+  bottom: auto;
+  background: #B3D1FF;
+}
+section.layout-toolbar {
+  top: 150px;
+  bottom: auto;
+  height: 50px;
+}
+section.layout-area {
+  padding-top: 150px;
+  min-height: 100%;
+  position: relative;
+}
+section.layout-content {
+  top: 202px;
+  padding: 10px;
+  text-align: center;
+  overflow: auto;
+}
+section.layout-toolbar,
+section.layout-header {
+  font-size: 24px;
+}
+section.layout-top,
+section.layout-toolbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: visible;
+}
+section.layout-modal,
+section.layout-menu {
+  overflow: visible;
+}
+section.layout-menu {
+  top: 50px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #eeeeee;
+}
+section.layout-modal {
+  background: rgba(255, 255, 255, 0.2);
+}
+section.layout-modal-content {
+  box-shadow: 0 0 20px #000;
+  overflow: auto;
+}
+section.layout-modal-content {
+  background-color: #ffffff;
+  top: 65px;
+  left: 15px;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 2px;
+}
+.item {
+  display: none;
+}
+.display-grid .item {
+  background: #f6f5f4;
+  display: inline-block;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  min-height: 280px;
+  max-height: 560px;
+  overflow: auto;
+  width: 280px;
+}
+.display-list .item {
+  display: block;
+  margin: 10px 10px 0;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  min-height: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.display-list .item:last-of-type {
+  border-bottom: none;
+}
+section.layout-content-filter {
+  left: 49px;
+  right: 149px;
+  overflow: visible;
+}
+#content-filter {
+  position: absolute;
+  border: none;
+  margin: 0;
+  padding: 9px 9px 9px 44px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  font-size: 18px;
+}
+.layout-toolbar .button.right,
+.layout-header .button.right {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.layout-toolbar .button.left,
+.layout-header .button.left {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+.layout-toolbar .button.left.typcn-zoom-outline,
+.layout-header .button.left.typcn-zoom-outline {
+  border-right: none;
+}
+body.content-maximize section.layout-content {
+  top: 0;
+}
+body.content-maximize section.layout-area {
+  padding-top: 0;
+}
+body.content-maximize section.layout-main {
+  padding: 0;
+  overflow: hidden;
+}
+body.content-maximize section.layout-header,
+body.content-maximize section.layout-hero,
+body.content-maximize section.layout-toolbar {
+  display: none;
+}
+#content-minimize {
+  font-size: 24px;
+  display: none;
+  position: fixed;
+  right: 0px;
+  top: -4px;
+  padding: 0 0 15px 15px;
+}
+body.device-ios #content-minimize {
+  top: -8px;
+  right: -2px;
+}
+body.content-maximize #content-minimize {
+  display: block;
+}

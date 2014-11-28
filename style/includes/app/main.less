@@ -1,0 +1,79 @@
+@heroSize: 150px;
+@toolbarSize: @buttonSize;
+
+section.layout-header {
+    height: @toolbarSize;
+    bottom: auto;
+    background-color: @darkGlassColor;
+    color: @lightTextColor;
+}
+
+section.layout-main {
+    padding: @toolbarSize 0 0;
+    overflow: auto;
+}
+
+section.layout-hero {
+    height: @heroSize;
+    bottom: auto;
+    background: #B3D1FF;
+}
+
+section.layout-toolbar {
+    top: @heroSize;
+    bottom: auto;
+    height: @toolbarSize;
+}
+
+section.layout-area {
+    padding-top: @heroSize;
+    min-height: 100%;
+    position: relative;
+}
+
+section.layout-content {
+    top: @heroSize + @toolbarSize + 2px;
+    padding: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+section.layout-toolbar, section.layout-header {
+    font-size: 24px;
+}
+
+section.layout-top, section.layout-toolbar {
+    border-bottom: 1px solid @tintColor;
+    border-top: 1px solid @tintColor;
+    overflow: visible;
+}
+
+section.layout-modal, section.layout-menu {
+    overflow: visible;
+}
+
+section.layout-menu {
+    top: @toolbarSize;
+    background-color: @veryDarkGlassColor;
+    color: @lightTextColor;
+}
+
+section.layout-modal {
+    background: @lightTintColor;
+}
+
+section.layout-modal-content {
+    box-shadow: 0 0 20px #000;
+    overflow: auto;
+}
+
+section.layout-modal-content {
+    @padding: 15px;
+
+    background-color: @modalBackgroundColor;
+    top: @toolbarSize + @padding;
+    left: @padding;
+    bottom: @padding;
+    right: @padding;
+    border-radius: 2px;
+}

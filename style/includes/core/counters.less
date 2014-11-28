@@ -1,0 +1,26 @@
+.counter {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    line-height: 12px;
+    text-align: center;
+
+    body.device-ios & {
+        left: 1px;
+        top: -3px;
+    }
+
+    .value {
+        margin: 0 auto;
+        display: inline-block;
+        padding: 5px 5px 4px;
+        border-radius: 5px;
+        width: auto;
+        font-size: 12px;
+        background: #a00;
+        min-width: 9px;
+        text-align: center;
+        color: #fff;
+    }
+}

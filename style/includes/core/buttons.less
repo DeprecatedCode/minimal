@@ -1,0 +1,38 @@
+@buttonSize: 50px;
+
+.button {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+
+    &.typcn {
+        line-height: @buttonSize - 2px;
+
+        body.device-ios & {
+            line-height: @buttonSize - 9px;
+        }
+    }
+
+    &.typcn.typcn-mail {
+        line-height: @buttonSize - 4px;
+    }
+
+    &.typcn::before {
+        display: inline-block;
+        width: @buttonSize;
+    }
+
+    &:active {
+        background: @tintColor;
+    }
+
+    &.active {
+        color: @accentColor;
+    }
+
+    &.disabled {
+        color: @disabledColor;
+    }
+}

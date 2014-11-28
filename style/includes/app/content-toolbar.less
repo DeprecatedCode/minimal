@@ -1,0 +1,33 @@
+section.layout-content-filter {
+    left: @toolbarSize - 1px;
+    right: 3 * @toolbarSize - 1px;
+    overflow: visible;
+}
+
+#content-filter {
+    position: absolute;
+    border: none;
+    margin: 0;
+    padding: 9px 9px 9px 44px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    font-size: 18px;
+}
+
+.layout-toolbar, .layout-header {
+    .button.right {
+        border-left: 1px solid @tintColor;
+    }
+
+    .button.left {
+        border-right: 1px solid @tintColor;
+    }
+
+    .button.left.typcn-zoom-outline {
+        border-right: none;
+    }
+}
