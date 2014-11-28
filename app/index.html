@@ -7,52 +7,72 @@
         <link href="/font/typicons.min.css" rel="stylesheet" type="text/css">
         <link href='/style.css' rel="stylesheet" type="text/css">
         <script src="/m.js"></script>
-        <script type="text/javascript">
+        <script src='/fastclick.js'></script>
+        <script>
+            if ('addEventListener' in document) {
+                document.addEventListener('DOMContentLoaded', function() {
+                    FastClick.attach(document.body);
+                }, false);
+            }
+
             M.ready(function () {
                 /**
-                 * Initialize all menus
+                 * Initialize all menus and modal open buttons
                  */
                 M.menu.scan();
+                M.modal.scan();
+
+                /**
+                 * Common variables
+                 */
+                var action = M.action,
+                    id = M.id,
+                    swCls = M.switchClass,
+                    behavior = M.behavior
 
                 /**
                  * Initialize all actions
                  */
-                M.action.scan();
+                action.scan();
 
                 /**
                  * Action for clearing content filter
                  */
-                M.action('clear-content-filter', function () {
-                    M.id('content-filter').value = '';
+                action('clear-content-filter', function () {
+                    id('content-filter').value = '';
                     M.behavior.trigger('content-filter-back');
                 });
 
                 /**
                  * Attach behavior to content filter for back button
                  */
-                M.behavior.live('content-filter-back', M.id('content-filter'), function (filter) {
-                    M.switchClass(M.id('content-back'), ['disabled'],
+                behavior.live('content-filter-back', id('content-filter'), function (filter) {
+                    swCls(id('content-back'), ['disabled'],
                         filter.value.length === 0 ? 'disabled' : null);
                 });
 
                 /**
                  * Attach behavior to grid / list buttons
                  */
-                M.action('display-type', function (data) {
-                    M.switchClass(M.id('content'), ['grid', 'list'], data.displayType, 'display-');
-                    M.switchClass(M.id('display-type-grid'), ['hide'], data.displayType === 'grid' ? null : 'hide');
-                    M.switchClass(M.id('display-type-list'), ['hide'], data.displayType === 'list' ? null : 'hide');
+                action('display-type', function (data) {
+                    swCls(id('content'), ['grid', 'list'], data.displayType, 'display-');
+                    swCls(id('display-type-grid'), ['hide'], data.displayType === 'grid' ? null : 'hide');
+                    swCls(id('display-type-list'), ['hide'], data.displayType === 'list' ? null : 'hide');
                 });
 
-                M.action.trigger('display-type', {displayType: 'grid'});
+                action.trigger('display-type', {displayType: 'grid'});
 
                 /**
                  * Attach behavior to content maximize / minimize buttons
                  */
-                M.action('content-resize', function (data) {
-                    var max = 'content-maximize';
-                    M.switchClass(document.body, [max], data.contentSize === 'max' ? max : null);
+                action('content-resize', function (data) {
+                    swCls(document.body, ['maximize'], data.contentSize === 'max' ? 'maximize' : null, 'content-');
                 });
+
+                /**
+                 * If you're developing a menu out, keep it open
+                 */
+                M.menu.show('app');
             });
         </script>
         <script>
@@ -101,20 +121,20 @@
 
                 <section id="content" class="layout-content">
 
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
+                    <div class="item">A</div>
+                    <div class="item">B</div>
+                    <div class="item">C</div>
+                    <div class="item">D</div>
 
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
+                    <div class="item">E</div>
+                    <div class="item">F</div>
+                    <div class="item">G</div>
+                    <div class="item">H</div>
 
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
-                    <div class="item"></div>
+                    <div class="item">I</div>
+                    <div class="item">J</div>
+                    <div class="item">K</div>
+                    <div class="item">L</div>
 
                 </section>
 
@@ -122,23 +142,33 @@
             </section>
         </section>
         <section class="layout-header">
-            <span data-menu-button="app" class="typcn typcn-th-menu button left"></span>
-            <span data-menu-button="user" class="typcn typcn-user button right"></span>
-            <span data-menu-button="notifications" class="typcn typcn-bell button right">
+            <span data-menu-show="app" class="typcn typcn-th-menu button left"></span>
+            <span data-menu-show="user" class="typcn typcn-user button right"></span>
+            <span data-menu-show="notifications" class="typcn typcn-bell button right">
                 <div class="counter"><div class="value">12</div></div>
             </span>
-            <span data-menu-button="messages" class="typcn typcn-mail button right">
+            <span data-menu-show="messages" class="typcn typcn-mail button right">
                 <div class="counter"><div class="value">3</div></div>
             </span>
         </section>
 
-        <!-- <section class="layout-modal">
+        <section class="layout-modal" data-modal="about">
             <section class="layout-modal-content">
+                <h1>About (M)inimal</h1>
+                <p>Minimal is a very simple webapp theme, designed to be torn apart and put together into the app of your dreams.</p>
+                <p>It uses LESS for CSS preprocessing, and grunt for JavaScript concatenation. No further optimization is done.</p>
+                <div class="button primary" data-modal-hide="about">OK</div>
+                <div class="button" data-modal-hide="about">Cancel</div>
             </section>
-        </section> -->
+        </section>
 
         <section class="layout-menu" data-menu="app">
             <section class="layout-menu-content">
+                <div data-modal-show="about" class="item"><span class="typcn typcn-news"></span> About (M)inimal</div>
+                <a target="_blank" href="https://github.com/NateFerrero/M/issues/new" class="item"><span class="typcn typcn-edit"></span> Feature Request</a>
+                <a target="_blank" href="https://github.com/NateFerrero/M/issues/new" class="item"><span class="typcn typcn-weather-stormy"></span> Report a Bug</a>
+                <a target="_blank" href="https://github.com/NateFerrero/M" class="item"><span class="typcn typcn-social-github"></span> Star on GitHub</a>
+
             </section>
         </section>
 

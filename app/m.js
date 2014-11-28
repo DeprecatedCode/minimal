@@ -50,8 +50,12 @@
         behaviors[name] = function (evt) {
             fn(el, evt);
         };
+        var timer;
         'change'.split(' ').forEach(function (event) {
-            el.addEventListener(event, behaviors[name]);
+            el.addEventListener(event, function () {
+                clearTimeout(timer);
+                timer = setTimeout(behaviors[name]);
+            });
         });
         behaviors[name]();
     };
@@ -60,8 +64,12 @@
         behaviors[name] = function (evt) {
             fn(el, evt);
         };
+        var timer;
         'keydown keyup keypress change'.split(' ').forEach(function (event) {
-            el.addEventListener(event, behaviors[name]);
+            el.addEventListener(event, function () {
+                clearTimeout(timer);
+                timer = setTimeout(behaviors[name]);
+            });
         });
         behaviors[name]();
     };
@@ -162,17 +170,25 @@
         M.query.forEach('[data-menu]', function (menu) {
             M.switchClass(menu, ['active'], menu.dataset.menu === name ? 'active' : null);
         });
-        M.query.forEach('[data-menu-button]', function (menuButton) {
-            M.switchClass(menuButton, ['active'], menuButton.dataset.menuButton === name ? 'active' : null);
+        M.query.forEach('[data-menu-show]', function (menuShow) {
+            M.switchClass(menuShow, ['active'], menuShow.dataset.menuShow === name ? 'active' : null);
         });
     };
 
     menu.scan = function () {
-        M.query.forEach('[data-menu-button]', function (menuButton) {
-            if (!menuButton._M_menuButtonInitialized) {
-                menuButton._M_menuButtonInitialized = true;
-                M.click(menuButton, function () {
-                    menu.show(menuButton.dataset.menuButton);
+        M.query.forEach('[data-menu-show]', function (menuShow) {
+            if (!menuShow._M_menuShowInitialized) {
+                menuShow._M_menuShowInitialized = true;
+                M.click(menuShow, function () {
+                    menu.show(menuShow.dataset.menuShow);
+                });
+            }
+        });
+        M.query.forEach('[data-menu-hide]', function (menuHide) {
+            if (!menuHide._M_menuHideInitialized) {
+                menuHide._M_menuHideInitialized = true;
+                M.click(menuHide, function () {
+                    menu.hide(menuHide.dataset.menuHide);
                 });
             }
         });
@@ -180,12 +196,52 @@
 })();
 
 /**
- * M - Modal
+ * M - Menu
  * @author Nate Ferrero
  */
 (function () {
-    var modal = this.M.modal = function (config) {
-        ;
+    var M = this.M;
+    var modalConfig = {};
+
+    var modal = this.M.modal = function (name, config) {
+        if (config) {
+            modalConfig[name] = config;
+        }
+    };
+
+    modal.hide = function (name) {
+        M.query.forEach('[data-modal=' + name + ']', function (modal) {
+            M.switchClass(modal, ['active'], null);
+        });
+    };
+
+    modal.show = function (name) {
+        /**
+         * Opening a modal closes all menus
+         */
+        M.menu.show();
+        M.query.forEach('[data-modal=' + name + ']', function (modal) {
+            M.switchClass(modal, ['active'], 'active');
+        });
+    };
+
+    modal.scan = function () {
+        M.query.forEach('[data-modal-show]', function (modalShow) {
+            if (!modalShow._M_modalShowInitialized) {
+                modalShow._M_modalShowInitialized = true;
+                M.click(modalShow, function () {
+                    modal.show(modalShow.dataset.modalShow);
+                });
+            }
+        });
+        M.query.forEach('[data-modal-hide]', function (modalHide) {
+            if (!modalHide._M_modalHideInitialized) {
+                modalHide._M_modalHideInitialized = true;
+                M.click(modalHide, function () {
+                    modal.hide(modalHide.dataset.modalHide);
+                });
+            }
+        });
     };
 })();
 

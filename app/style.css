@@ -5,6 +5,11 @@ html {
   height: 100%;
   overflow: hidden;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+}
 .left {
   float: left;
 }
@@ -16,9 +21,11 @@ html {
 }
 body,
 input,
-textarea {
+textarea,
+select {
   font-family: Roboto, sans-serif;
   font-size: 18px;
+  color: #333333;
 }
 section[class^="layout-"] {
   position: absolute;
@@ -38,15 +45,57 @@ section[class^="layout-"] {
   background: rgba(0, 0, 0, 0.7);
   color: #55bbff;
 }
+section.layout-menu {
+  top: 50px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #eeeeee;
+}
+section.layout-modal {
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  display: none;
+}
+section.layout-modal.active {
+  display: block;
+}
+section.layout-modal-content {
+  box-shadow: 0 0 20px #000;
+  overflow: auto;
+  padding: 0 1em;
+}
+section.layout-modal-content {
+  background-color: #ffffff;
+  top: 65px;
+  left: 15px;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 2px;
+}
 .button {
   box-sizing: border-box;
   position: relative;
   display: inline-block;
   height: 50px;
-  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  min-width: 50px;
+  padding: 0 0.5em;
+  text-transform: uppercase;
+  cursor: default;
+}
+.layout-modal .button {
+  float: right;
+  font-size: 22px;
+  color: #777777;
+  border-radius: 2px;
+}
+.layout-modal .button.primary {
+  color: #55bbff;
 }
 .button.typcn {
+  padding: 0;
   line-height: 48px;
+  width: 50px;
 }
 body.device-ios .button.typcn {
   line-height: 41px;
@@ -58,11 +107,15 @@ body.device-ios .button.typcn {
   display: inline-block;
   width: 50px;
 }
+.button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
 .button:active {
   background: rgba(0, 0, 0, 0.2);
 }
 .button.active {
   color: #55bbff;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .button.disabled {
   color: #dddddd;
@@ -132,34 +185,12 @@ section.layout-toolbar {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   overflow: visible;
 }
-section.layout-modal,
-section.layout-menu {
-  overflow: visible;
-}
-section.layout-menu {
-  top: 50px;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: #eeeeee;
-}
-section.layout-modal {
-  background: rgba(255, 255, 255, 0.2);
-}
-section.layout-modal-content {
-  box-shadow: 0 0 20px #000;
-  overflow: auto;
-}
-section.layout-modal-content {
-  background-color: #ffffff;
-  top: 65px;
-  left: 15px;
-  bottom: 15px;
-  right: 15px;
-  border-radius: 2px;
-}
-.item {
+.layout-content .item {
   display: none;
+  font-size: 80px;
+  color: #ccc;
 }
-.display-grid .item {
+.layout-content.display-grid .item {
   background: #f6f5f4;
   display: inline-block;
   margin: 10px;
@@ -171,7 +202,7 @@ section.layout-modal-content {
   overflow: auto;
   width: 280px;
 }
-.display-list .item {
+.layout-content.display-list .item {
   display: block;
   margin: 10px 10px 0;
   padding-bottom: 10px;
@@ -179,8 +210,31 @@ section.layout-modal-content {
   min-height: 50px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.display-list .item:last-of-type {
+.layout-content.display-list .item:last-of-type {
   border-bottom: none;
+}
+.layout-menu .item {
+  display: block;
+  box-sizing: border-box;
+  padding: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 75px;
+  cursor: default;
+}
+.layout-menu .item .typcn {
+  font-size: 24px;
+  line-height: 22px;
+  vertical-align: -1px;
+  padding-right: 2px;
+}
+.layout-menu .item .typcn:before {
+  height: auto;
+}
+.layout-menu .item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.layout-menu .item:active {
+  background: rgba(255, 255, 255, 0.1);
 }
 section.layout-content-filter {
   left: 49px;

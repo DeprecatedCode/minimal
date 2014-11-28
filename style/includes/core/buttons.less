@@ -4,11 +4,29 @@
     box-sizing: border-box;
     position: relative;
     display: inline-block;
-    height: 50px;
-    width: 50px;
+    height: @buttonSize;
+    line-height: @buttonSize;
+    text-align: center;
+    min-width: @buttonSize;
+    padding: 0 0.5em;
+    text-transform: uppercase;
+    cursor: default;
+
+    .layout-modal & {
+        float: right;
+        font-size: 22px;
+        color: @altTextColor;
+        border-radius: 2px;
+        
+        &.primary {
+            color: @accentColor;
+        }
+    }
 
     &.typcn {
+        padding: 0;
         line-height: @buttonSize - 2px;
+        width: @buttonSize;
 
         body.device-ios & {
             line-height: @buttonSize - 9px;
@@ -24,12 +42,17 @@
         width: @buttonSize;
     }
 
+    &:hover {
+        background: @hintTintColor;
+    }
+
     &:active {
         background: @tintColor;
     }
 
     &.active {
         color: @accentColor;
+        background-color: @darkGlassColor;
     }
 
     &.disabled {

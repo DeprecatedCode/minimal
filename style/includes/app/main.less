@@ -47,33 +47,3 @@ section.layout-top, section.layout-toolbar {
     border-top: 1px solid @tintColor;
     overflow: visible;
 }
-
-section.layout-modal, section.layout-menu {
-    overflow: visible;
-}
-
-section.layout-menu {
-    top: @toolbarSize;
-    background-color: @veryDarkGlassColor;
-    color: @lightTextColor;
-}
-
-section.layout-modal {
-    background: @lightTintColor;
-}
-
-section.layout-modal-content {
-    box-shadow: 0 0 20px #000;
-    overflow: auto;
-}
-
-section.layout-modal-content {
-    @padding: 15px;
-
-    background-color: @modalBackgroundColor;
-    top: @toolbarSize + @padding;
-    left: @padding;
-    bottom: @padding;
-    right: @padding;
-    border-radius: 2px;
-}

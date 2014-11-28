@@ -1,0 +1,26 @@
+section.layout-modal {
+    background: @lightTintColor;
+    z-index: 1;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+section.layout-modal-content {
+    box-shadow: 0 0 20px #000;
+    overflow: auto;
+    padding: 0 1em;
+}
+
+section.layout-modal-content {
+    @padding: 15px;
+
+    background-color: @modalBackgroundColor;
+    top: @toolbarSize + @padding;
+    left: @padding;
+    bottom: @padding;
+    right: @padding;
+    border-radius: 2px;
+}
