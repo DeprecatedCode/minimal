@@ -1,5 +1,5 @@
-M
-=
+(M)inimal
+=========
 
 Minimal Web + Mobile App Layout: Use to quickly prototype or launch an app.
 
