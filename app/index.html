@@ -28,7 +28,8 @@
                 var action = M.action,
                     id = M.id,
                     swCls = M.switchClass,
-                    behavior = M.behavior
+                    behavior = M.behavior,
+                    query = M.query;
 
                 /**
                  * Initialize all actions
@@ -70,9 +71,42 @@
                 });
 
                 /**
+                 * Attach behavior to clear unread messages
+                 */
+                action('clear-unread-messages', function (data) {
+                    query.forEach('[data-menu="messages"] .item', function (item) {
+                        query.first('[data-menu="messages"] .layout-menu-content').appendChild(item);
+                    });
+                    query.forEach('[data-menu="messages"] [data-action="clear-unread-messages"]', function (btn) {
+                        btn.classList.add('disabled');
+                    })
+                    query.first('[data-menu="messages"] h1').innerText = 'No unread messages';
+                    query.first('[data-menu="messages"] .no-unread').classList.remove('hide');
+                    query.first('[data-menu-show="messages"] .counter').classList.add('hide');
+                });
+
+                /**
+                 * Attach behavior to clear unread notifications
+                 */
+                action('clear-unread-notifications', function (data) {
+                    query.forEach('[data-menu="notifications"] .item', function (item) {
+                        query.first('[data-menu="notifications"] .layout-menu-content').appendChild(item);
+                    });
+                    query.forEach('[data-menu="notifications"] [data-action="clear-unread-notifications"]', function (btn) {
+                        btn.classList.add('disabled');
+                    })
+                    query.first('[data-menu="notifications"] h1').innerText = 'No unread notifications';
+                    query.first('[data-menu="notifications"] .no-unread').classList.remove('hide');
+                    query.first('[data-menu-show="notifications"] .counter').classList.add('hide');
+                });
+
+                /**
                  * If you're working on a menu, keep it open over refreshes
                  */
                 // M.menu.show('app');
+                // M.menu.show('user');
+                 M.menu.show('messages');
+                //M.menu.show('notifications');
             });
         </script>
         <script>
@@ -114,9 +148,9 @@
                     </section>
 
                     <span data-action="content-resize" data-content-size="max" id="content-maximize" class="typcn typcn-arrow-maximise button right"></span>
-                    <span class="typcn typcn-filter button right"></span>
-                    <span data-display-type="list" data-action="display-type" id="display-type-grid" class="hide typcn typcn-th-large button right"></span>
-                    <span data-display-type="grid" data-action="display-type" id="display-type-list" class="hide typcn typcn-th-list button right"></span>
+                    <span data-modal-show="filter" class="typcn typcn-filter button right"></span>
+                    <span data-action="display-type" data-display-type="list" id="display-type-grid" class="hide typcn typcn-th-large button right"></span>
+                    <span data-action="display-type" data-display-type="grid" id="display-type-list" class="hide typcn typcn-th-list button right"></span>
                 </section>
 
                 <section id="content" class="layout-content">
@@ -162,9 +196,35 @@
             </section>
         </section>
 
+        <section class="layout-modal" data-modal="filter">
+            <section class="layout-modal-content">
+                <h1>Filter</h1>
+                <div class="button primary" data-modal-hide="filter">Done</div>
+            </section>
+        </section>
+
+        <section class="layout-modal" data-modal="typography">
+            <section class="layout-modal-content">
+                <h1>Header 1</h1>
+                <p>A paragraph node immediately following the header element.</p>
+                <h2>Header 2</h2>
+                <p>A paragraph node immediately following the header element.</p>
+                <h3>Header 3</h3>
+                <p>A paragraph node immediately following the header element.</p>
+                <h4>Header 4</h4>
+                <p>A paragraph node immediately following the header element.</p>
+                <h5>Header 5</h5>
+                <p>A paragraph node immediately following the header element.</p>
+                <h6>Header 6</h6>
+                <p>A paragraph node immediately following the header element.</p>
+                <div class="button primary" data-modal-hide="typography">Done</div>
+            </section>
+        </section>
+
         <section class="layout-menu" data-menu="app">
             <section class="layout-menu-content">
-                <div data-modal-show="about" class="item"><span class="typcn typcn-news"></span> About (M)inimal</div>
+                <div data-modal-show="about" class="item"><span class="typcn typcn-info-large-outline"></span> About (M)inimal</div>
+                <div data-modal-show="typography" class="item"><span class="typcn typcn-sort-alphabetically"></span> Typography</div>
                 <a target="_blank" href="https://github.com/NateFerrero/minimal/issues/new" class="item"><span class="typcn typcn-edit"></span> Feature Request</a>
                 <a target="_blank" href="https://github.com/NateFerrero/minimal/issues/new" class="item"><span class="typcn typcn-weather-stormy"></span> Report a Bug</a>
                 <a target="_blank" href="https://github.com/NateFerrero/minimal" class="item"><span class="typcn typcn-social-github"></span> Star on GitHub</a>
@@ -174,11 +234,98 @@
 
         <section class="layout-menu" data-menu="messages">
             <section class="layout-menu-content">
+                <span class="typcn typcn-input-checked button right" data-action="clear-unread-messages"></span>
+                <h1>3 unread messages</h1>
+                <div class="no-unread hide"><span class="typcn typcn-thumbs-up"></span></div>
+                <div class="item">
+                    <div class="image" style="background-image: url(//graph.facebook.com/JonCBell/picture?type=large)"></div>
+                    <div class="title">Jonathan Bell</div>
+                    <div class="subtitle">Here are the latest numbers: we have an 124 percent increase in revenue month-over-month, and an average of 100 new user signups per day.</div>
+                </div>
+                <div class="item">
+                    <div class="image">E</div>
+                    <div class="title">Esurance</div>
+                    <div class="subtitle">Drive more than one car? Boy do we have discounts for you up the wazoo. Save up to -0.25% per additional vehicle.</div>
+                </div>
+                <div class="item">
+                    <div class="image" style="background-image: url(//graph.facebook.com/nateferrero/picture?type=large)"></div>
+                    <div class="title">Me</div>
+                    <div class="subtitle">Remember to take out the trash tomorrow.</div>
+                </div>
+                <div class="space"></div>
+                <span class="typcn typcn-time button left"></span>
+                <h1>Previously read</h1>
             </section>
         </section>
 
         <section class="layout-menu" data-menu="notifications">
             <section class="layout-menu-content">
+                <span class="typcn typcn-input-checked button right" data-action="clear-unread-notifications"></span>
+                <h1>12 unread notifications</h1>
+                <div class="no-unread hide"><span class="typcn typcn-thumbs-up"></span></div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 1.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 2.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 3.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 4.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 5.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 6.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 7.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 8.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 9.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 10.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 11.</div>
+                </div>
+                <div class="item">
+                    <div class="image">T</div>
+                    <div class="title">Test</div>
+                    <div class="subtitle">Test notifcation 12.</div>
+                </div>
+                <div class="space"></div>
+                <span class="typcn typcn-time button left"></span>
+                <h1>Previously read</h1>
             </section>
         </section>
 

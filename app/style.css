@@ -4,6 +4,8 @@ html {
   padding: 0;
   height: 100%;
   overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  /* Prevent font scaling in landscape while allowing user zoom */
 }
 a {
   text-decoration: none;
@@ -24,8 +26,36 @@ input,
 textarea,
 select {
   font-family: Roboto, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   color: #333333;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  line-height: 1.45;
+  margin: 20px 0;
+}
+h1 {
+  font-size: 28px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 22px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 18px;
+}
+h6 {
+  font-size: 16px;
 }
 section[class^="layout-"] {
   position: absolute;
@@ -49,26 +79,112 @@ section.layout-menu {
   top: 50px;
   background-color: rgba(0, 0, 0, 0.9);
   color: #eeeeee;
+  z-index: 3;
+}
+section.layout-menu .button.disabled {
+  color: #777777;
+}
+section.layout-menu .no-unread {
+  text-align: center;
+  line-height: 76px;
+  font-size: 76px;
+  margin-top: 76px;
+  color: rgba(255, 255, 255, 0.3);
+}
+section.layout-menu section.layout-menu-content {
+  overflow-y: auto;
+}
+section.layout-menu h1 {
+  font-size: 14px;
+  margin: 0;
+}
+section.layout-menu h1,
+section.layout-menu .item {
+  padding: 16px 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+section.layout-menu .space {
+  height: 76px;
+}
+section.layout-menu .item {
+  display: block;
+  box-sizing: border-box;
+  min-height: 56px;
+  cursor: default;
+  overflow: hidden;
+}
+section.layout-menu .item .typcn {
+  display: inline-block;
+  font-size: 24px;
+  line-height: 22px;
+  vertical-align: -1px;
+  width: 32px;
+}
+section.layout-menu .item .typcn:before {
+  height: auto;
+}
+section.layout-menu .item:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+section.layout-menu .item:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+section.layout-menu .item .image {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 43px;
+  width: 43px;
+  padding: 10px;
+  line-height: 23px;
+  font-size: 150%;
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  float: left;
+  background-size: cover;
+  text-align: center;
+}
+section.layout-menu .item .image,
+section.layout-menu .item .title,
+section.layout-menu .item .subtitle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+section.layout-menu .item .subtitle,
+section.layout-menu .item .title {
+  padding-left: 13px;
+}
+section.layout-menu .item .subtitle {
+  color: #777777;
+  padding-top: 4px;
+  font-size: 14px;
 }
 section.layout-modal {
-  background: rgba(255, 255, 255, 0.2);
-  z-index: 1;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 4;
   display: none;
 }
 section.layout-modal.active {
   display: block;
 }
 section.layout-modal-content {
-  box-shadow: 0 0 20px #000;
+  box-shadow: 0 0 30px #000;
   overflow: auto;
-  padding: 0 1em;
+  padding: 20px;
+}
+section.layout-modal-content *:first-child {
+  margin-top: 0;
+}
+section.layout-modal-content *:last-child {
+  margin-bottom: 0;
 }
 section.layout-modal-content {
   background-color: #ffffff;
-  top: 65px;
-  left: 15px;
-  bottom: 15px;
-  right: 15px;
+  top: 60px;
+  left: 10px;
+  bottom: 10px;
+  right: 10px;
   border-radius: 2px;
 }
 .button {
@@ -82,30 +198,35 @@ section.layout-modal-content {
   padding: 0 0.5em;
   text-transform: uppercase;
   cursor: default;
+  font-size: 24px;
 }
 .layout-modal .button {
   float: right;
-  font-size: 22px;
   color: #777777;
   border-radius: 2px;
+  margin: 20px 0;
 }
 .layout-modal .button.primary {
   color: #55bbff;
 }
 .button.typcn {
   padding: 0;
-  line-height: 48px;
+  line-height: 52px;
   width: 50px;
 }
 body.device-ios .button.typcn {
-  line-height: 41px;
+  line-height: 51px;
 }
 .button.typcn.typcn-mail {
-  line-height: 46px;
+  line-height: 48px;
 }
 .button.typcn::before {
+  position: relative;
   display: inline-block;
   width: 50px;
+  height: 50px;
+  vertical-align: 4px;
+  z-index: 1;
 }
 .button:active {
   background: rgba(0, 0, 0, 0.2);
@@ -210,29 +331,6 @@ section.layout-toolbar {
 .layout-content.display-list .item:last-of-type {
   border-bottom: none;
 }
-.layout-menu .item {
-  display: block;
-  box-sizing: border-box;
-  padding: 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  min-height: 75px;
-  cursor: default;
-}
-.layout-menu .item .typcn {
-  font-size: 24px;
-  line-height: 22px;
-  vertical-align: -1px;
-  padding-right: 2px;
-}
-.layout-menu .item .typcn:before {
-  height: auto;
-}
-.layout-menu .item:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-.layout-menu .item:active {
-  background: rgba(255, 255, 255, 0.1);
-}
 section.layout-content-filter {
   left: 49px;
   right: 149px;
@@ -250,6 +348,7 @@ section.layout-content-filter {
   box-sizing: border-box;
   background: transparent;
   font-size: 18px;
+  z-index: 2;
 }
 .layout-toolbar .button.right,
 .layout-header .button.right {

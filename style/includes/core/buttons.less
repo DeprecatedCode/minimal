@@ -11,12 +11,13 @@
     padding: 0 0.5em;
     text-transform: uppercase;
     cursor: default;
+    font-size: 24px;
 
     .layout-modal & {
         float: right;
-        font-size: 22px;
         color: @altTextColor;
         border-radius: 2px;
+        margin: 20px 0;
         
         &.primary {
             color: @accentColor;
@@ -25,21 +26,25 @@
 
     &.typcn {
         padding: 0;
-        line-height: @buttonSize - 2px;
+        line-height: @buttonSize + 2px;
         width: @buttonSize;
 
         body.device-ios & {
-            line-height: @buttonSize - 9px;
+            line-height: @buttonSize + 1px;
         }
     }
 
     &.typcn.typcn-mail {
-        line-height: @buttonSize - 4px;
+        line-height: @buttonSize - 2px;
     }
 
     &.typcn::before {
+        position: relative;
         display: inline-block;
         width: @buttonSize;
+        height: @buttonSize;
+        vertical-align: 4px;
+        z-index: 1;
     }
 
     &:active {

@@ -1,6 +1,6 @@
 section.layout-modal {
     background: @lightTintColor;
-    z-index: 1;
+    z-index: 4;
     display: none;
 
     &.active {
@@ -9,13 +9,21 @@ section.layout-modal {
 }
 
 section.layout-modal-content {
-    box-shadow: 0 0 20px #000;
+    box-shadow: 0 0 30px #000;
     overflow: auto;
-    padding: 0 1em;
+    padding: 20px;
+
+    *:first-child {
+        margin-top: 0;
+    }
+
+    *:last-child {
+        margin-bottom: 0;
+    }
 }
 
 section.layout-modal-content {
-    @padding: 15px;
+    @padding: 10px;
 
     background-color: @modalBackgroundColor;
     top: @toolbarSize + @padding;

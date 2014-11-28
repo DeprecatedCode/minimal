@@ -15,4 +15,96 @@ section.layout-menu {
     top: @toolbarSize;
     background-color: @veryDarkGlassColor;
     color: @lightTextColor;
+    z-index: 3;
+
+    .button.disabled {
+        color: @altTextColor;
+    }
+
+    .no-unread {
+        text-align: center;
+        line-height: 76px;
+        font-size: 76px;
+        margin-top: 76px;
+        color: @lightTintColor;
+    }
+
+    section.layout-menu-content {
+        overflow-y: auto;
+    }
+
+    h1 {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    h1, .item {
+        padding: 16px 13px;
+        border-bottom: 1px solid @veryLightTintColor;
+    }
+
+    .space {
+        height: 76px;
+    }
+
+
+    .item {
+        display: block;
+        box-sizing: border-box;
+        min-height: 56px;
+        cursor: default;
+        overflow: hidden;
+
+        .typcn {
+            display: inline-block;
+            font-size: 24px;
+            line-height: 22px;
+            vertical-align: -1px;
+            width: 32px;
+
+            &:before {
+                height: auto;
+            }
+        }
+
+        &:hover {
+            background: @lightTintColor;
+        }
+
+        &:active {
+            background: @veryLightTintColor;
+        }
+
+        .image {
+            box-sizing: border-box;
+            display: inline-block;
+            height: 43px;
+            width: 43px;
+            padding: 10px;
+            line-height: 23px;
+            font-size: 150%;
+            background: @lightTintColor;
+            color: @lightTintColor;
+            border-radius: 4px;
+            float: left;
+            background-size: cover;
+            text-align: center;
+        }
+
+        .image, .title, .subtitle {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .subtitle, .title {
+            padding-left: 13px;
+        }
+
+        .subtitle {
+            color: @altTextColor;
+            padding-top: 4px;
+            font-size: 14px;
+        }
+    }
 }
