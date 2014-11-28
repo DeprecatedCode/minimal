@@ -187,6 +187,12 @@ section.layout-modal-content {
   right: 10px;
   border-radius: 2px;
 }
+section.layout-modal-content a {
+  color: #55bbff;
+}
+section.layout-modal-content a:active {
+  background: rgba(0, 0, 0, 0.2);
+}
 .button {
   box-sizing: border-box;
   position: relative;
