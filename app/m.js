@@ -153,6 +153,8 @@
 (function () {
     var M = this.M;
     var menuConfig = {};
+    var removeActiveTimer = {};
+    var ANIMATION_DELAY = 700;
 
     var menu = this.M.menu = function (name, config) {
         if (config) {
@@ -164,14 +166,29 @@
         /**
          * If the menu is already open, hide it
          */
-        if (M.query.exists('[data-menu=' + name + '].active')) {
+        if (M.query.exists('[data-menu=' + name + '].ready')) {
             name = null;
         }
+        clearTimeout(removeActiveTimer[name]);
         M.query.forEach('[data-menu]', function (menu) {
-            M.switchClass(menu, ['active'], menu.dataset.menu === name ? 'active' : null);
+            if (menu.dataset.menu === name) {
+                M.switchClass(menu, [], 'active');
+                setTimeout(function () {
+                    M.switchClass(menu, [], 'ready');
+                });
+            }
+            else {
+                M.switchClass(menu, ['ready']);
+                removeActiveTimer[menu.dataset.menu] = setTimeout(function () {
+                    M.switchClass(menu, ['active']);
+                }, ANIMATION_DELAY);
+            }
         });
         M.query.forEach('[data-menu-show]', function (menuShow) {
             M.switchClass(menuShow, ['active'], menuShow.dataset.menuShow === name ? 'active' : null);
+            setTimeout(function () {
+                M.switchClass(menuShow, ['ready'], menuShow.dataset.menuShow === name ? 'ready' : null);
+            });
         });
     };
 
@@ -202,6 +219,8 @@
 (function () {
     var M = this.M;
     var modalConfig = {};
+    var hideTimer = {};
+    var ANIMATION_DELAY = 700;
 
     var modal = this.M.modal = function (name, config) {
         if (config) {
@@ -211,7 +230,10 @@
 
     modal.hide = function (name) {
         M.query.forEach('[data-modal=' + name + ']', function (modal) {
-            M.switchClass(modal, ['active'], null);
+            M.switchClass(modal, ['ready'], null);
+            hideTimer[name] = setTimeout(function () {
+                M.switchClass(modal, ['active'], null);
+            }, ANIMATION_DELAY);
         });
     };
 
@@ -220,8 +242,12 @@
          * Opening a modal closes all menus
          */
         M.menu.show();
+        clearTimeout(hideTimer[name]);
         M.query.forEach('[data-modal=' + name + ']', function (modal) {
-            M.switchClass(modal, ['active'], 'active');
+            M.switchClass(modal, [], 'active');
+            setTimeout(function () {
+                M.switchClass(modal, [], 'ready');
+            });
         });
     };
 

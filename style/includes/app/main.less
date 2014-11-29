@@ -6,6 +6,7 @@ section.layout-header {
     bottom: auto;
     background-color: @darkGlassColor;
     color: @lightTextColor;
+    z-index: 4;
 }
 
 section.layout-main {
@@ -46,4 +47,51 @@ section.layout-top, section.layout-toolbar {
     border-bottom: 1px solid @tintColor;
     border-top: 1px solid @tintColor;
     overflow: visible;
+}
+
+/**
+ * All transitions here
+ */
+@time: 0.4s;
+
+section.layout-menu {
+    &.active {
+        height: 0;
+        opacity: 0;
+        transition: opacity ease-out @time, height ease @time;
+    }
+
+    &.ready {
+        height: 100%;
+        opacity: 1;
+    }
+}
+
+section.layout-modal {
+    &.active {
+        opacity: 0;
+        transition: opacity ease-out @time;
+    }
+
+    &.ready {
+        opacity: 1;
+    }
+}
+
+section.layout-menu-content {
+    transform: translate(0, -10px);
+    transition: transform ease-out @time;
+
+    section.layout-menu.ready & {
+        transform: translate(0, 0);
+    }
+}
+
+section.layout-modal-content {
+    transform: translate(0, 20px) scale(0.95);
+    transition: transform ease-out @time;
+
+    section.layout-modal.ready & {
+        transform: translate(0, 0) scale(1);
+    }
 }

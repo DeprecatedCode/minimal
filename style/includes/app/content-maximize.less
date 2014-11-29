@@ -1,31 +1,26 @@
+section.layout-content, section.layout-main, section.layout-header {
+    transition: top ease @time;
+}
+
 body.content-maximize {
+    section.layout-header, section.layout-main {
+        top: -@heroSize * 2;
+    }
+
     section.layout-content {
-        top: 0;
-    }
-
-    section.layout-area {
-        padding-top: 0;
-    }
-
-    section.layout-main {
-        padding: 0;
-        overflow: hidden;
-    }
-
-    section.layout-header,
-    section.layout-hero,
-    section.layout-toolbar {
-        display: none;
+        top: @heroSize * 2 - @toolbarSize;
     }
 }
 
 #content-minimize {
     font-size: 24px;
-    display: none;
     position: fixed;
+    padding: 0 0 15px 15px;
+    opacity: 0;
     right: 0px;
     top: -4px;
-    padding: 0 0 15px 15px;
+    width: 0;
+    overflow: hidden;
 
     body.device-ios & {
         top: -8px;
@@ -33,6 +28,8 @@ body.content-maximize {
     }
 
     body.content-maximize & {
-        display: block;
+        opacity: 1;
+        width: auto;
+        transition: opacity ease @time;
     }
 }
