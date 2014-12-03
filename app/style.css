@@ -313,9 +313,8 @@ section.layout-toolbar {
  * All transitions here
  */
 section.layout-menu.active {
-  height: 0;
   opacity: 0;
-  transition: opacity ease-out 0.4s, height ease 0.4s;
+  transition: opacity ease-out 0.3s;
 }
 section.layout-menu.ready {
   height: 100%;
@@ -323,24 +322,24 @@ section.layout-menu.ready {
 }
 section.layout-modal.active {
   opacity: 0;
-  transition: opacity ease-out 0.4s;
+  transition: opacity ease-out 0.3s;
 }
 section.layout-modal.ready {
   opacity: 1;
 }
 section.layout-menu-content {
-  transform: translate(0, -10px);
-  transition: transform ease-out 0.4s;
+  transform: translate3d(0, -10px, 0);
+  transition: transform ease-out 0.3s;
 }
 section.layout-menu.ready section.layout-menu-content {
-  transform: translate(0, 0);
+  transform: translate3d(0, 0, 0);
 }
 section.layout-modal-content {
-  transform: translate(0, 20px) scale(0.95);
-  transition: transform ease-out 0.4s;
+  transform: translate3d(0, 20px, 0) scale(0.95);
+  transition: transform ease-out 0.3s;
 }
 section.layout-modal.ready section.layout-modal-content {
-  transform: translate(0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
 }
 .layout-content .item {
   display: none;
@@ -404,7 +403,7 @@ section.layout-content-filter {
 section.layout-content,
 section.layout-main,
 section.layout-header {
-  transition: top ease 0.4s;
+  transition: top ease 0.3s;
 }
 body.content-maximize section.layout-header,
 body.content-maximize section.layout-main {
@@ -430,5 +429,5 @@ body.device-ios #content-minimize {
 body.content-maximize #content-minimize {
   opacity: 1;
   width: auto;
-  transition: opacity ease 0.4s;
+  transition: opacity ease 0.3s;
 }
