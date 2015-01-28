@@ -64,13 +64,6 @@
                 action.trigger('display-type', {displayType: 'grid'});
 
                 /**
-                 * Attach behavior to content maximize / minimize buttons
-                 */
-                action('content-resize', function (data) {
-                    swCls(document.body, ['maximize'], data.contentSize === 'max' ? 'maximize' : null, 'content-');
-                });
-
-                /**
                  * Attach behavior to clear unread messages
                  */
                 action('clear-unread-messages', function (data) {
@@ -133,48 +126,42 @@
         </script>
     </head>
     <body>
-        <section class="layout-main">
-            <section class="layout-area">
-                <section class="layout-hero">
-                    <section class="layout-map" id="map-canvas"></section>
-                </section>
-
-                <section class="layout-toolbar">
-                    <span class="typcn typcn-chevron-left button left disabled" id="content-back" data-action="clear-content-filter"></span>
-
-                    <span class="typcn typcn-zoom-outline button left disabled"></span>
-                    <section class="layout-content-filter">
-                        <input id="content-filter" placeholder="Filter"></input>
-                    </section>
-
-                    <span data-action="content-resize" data-content-size="max" id="content-maximize" class="typcn typcn-arrow-maximise button right"></span>
-                    <span data-modal-show="filter" class="typcn typcn-filter button right"></span>
-                    <span data-action="display-type" data-display-type="list" id="display-type-grid" class="hide typcn typcn-th-large button right"></span>
-                    <span data-action="display-type" data-display-type="grid" id="display-type-list" class="hide typcn typcn-th-list button right"></span>
-                </section>
-
-                <section id="content" class="layout-content">
-
-                    <div class="item">A</div>
-                    <div class="item">B</div>
-                    <div class="item">C</div>
-                    <div class="item">D</div>
-
-                    <div class="item">E</div>
-                    <div class="item">F</div>
-                    <div class="item">G</div>
-                    <div class="item">H</div>
-
-                    <div class="item">I</div>
-                    <div class="item">J</div>
-                    <div class="item">K</div>
-                    <div class="item">L</div>
-
-                </section>
-
-                <span data-action="content-resize" id="content-minimize" class="typcn typcn-arrow-minimise"></span>
-            </section>
+        <section class="hero">
+            <section class="layout-map" id="map-canvas"></section>
         </section>
+
+        <section class="toolbar">
+            <span class="typcn typcn-chevron-left button left disabled" id="content-back" data-action="clear-content-filter"></span>
+
+            <span class="typcn typcn-zoom-outline button left disabled"></span>
+            <section class="layout-content-filter">
+                <input id="content-filter" placeholder="Filter"></input>
+            </section>
+
+            <span data-modal-show="filter" class="typcn typcn-filter button right"></span>
+            <span data-action="display-type" data-display-type="list" id="display-type-grid" class="hide typcn typcn-th-large button right"></span>
+            <span data-action="display-type" data-display-type="grid" id="display-type-list" class="hide typcn typcn-th-list button right"></span>
+        </section>
+
+        <section id="content" class="content">
+
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+
+            <div class="item">E</div>
+            <div class="item">F</div>
+            <div class="item">G</div>
+            <div class="item">H</div>
+
+            <div class="item">I</div>
+            <div class="item">J</div>
+            <div class="item">K</div>
+            <div class="item">L</div>
+
+        </section>
+
         <section class="layout-header">
             <span data-menu-show="app" class="typcn typcn-th-menu button left"></span>
             <span data-menu-show="user" class="typcn typcn-user button right"></span>
@@ -233,7 +220,7 @@
             </section>
         </section>
 
-        <section class="layout-menu" data-menu="messages">
+        <section class="side-right layout-menu" data-menu="messages">
             <section class="layout-menu-content">
                 <span class="typcn typcn-input-checked button right" data-action="clear-unread-messages"></span>
                 <h1>3 unread messages</h1>
@@ -259,7 +246,7 @@
             </section>
         </section>
 
-        <section class="layout-menu" data-menu="notifications">
+        <section class="side-right layout-menu" data-menu="notifications">
             <section class="layout-menu-content">
                 <span class="typcn typcn-input-checked button right" data-action="clear-unread-notifications"></span>
                 <h1>12 unread notifications</h1>
@@ -330,7 +317,7 @@
             </section>
         </section>
 
-        <section class="layout-menu" data-menu="user">
+        <section class="side-right layout-menu" data-menu="user">
             <section class="layout-menu-content">
             </section>
         </section>

@@ -154,7 +154,7 @@
     var M = this.M;
     var menuConfig = {};
     var removeActiveTimer = {};
-    var ANIMATION_DELAY = 700;
+    var ANIMATION_DELAY = 300;
 
     var menu = this.M.menu = function (name, config) {
         if (config) {
@@ -220,7 +220,7 @@
     var M = this.M;
     var modalConfig = {};
     var hideTimer = {};
-    var ANIMATION_DELAY = 700;
+    var ANIMATION_DELAY = 300;
 
     var modal = this.M.modal = function (name, config) {
         if (config) {

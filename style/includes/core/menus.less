@@ -12,10 +12,18 @@
 }
 
 section.layout-menu {
+    width: 100%;
+    position: fixed;
     top: @toolbarSize;
     background-color: @veryDarkGlassColor;
     color: @lightTextColor;
     z-index: 3;
+    max-width: 568px;
+
+    &.side-right {
+        right: 0;
+        left: auto;
+    }
 
     .button.disabled {
         color: @altTextColor;

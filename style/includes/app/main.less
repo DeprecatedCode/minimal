@@ -1,9 +1,5 @@
-@heroSize: 150px;
+@heroSize: 100px;
 @toolbarSize: @buttonSize;
-
-.gpu() {
-        
-}
 
 section.layout-header {
     height: @toolbarSize;
@@ -11,43 +7,30 @@ section.layout-header {
     background-color: @darkGlassColor;
     color: @lightTextColor;
     z-index: 4;
+    position: fixed;
 }
 
-section.layout-main {
-    padding: @toolbarSize 0 0;
-    overflow: auto;
-}
-
-section.layout-hero {
+section.hero {
     height: @heroSize;
-    bottom: auto;
     background: #B3D1FF;
-}
-
-section.layout-toolbar {
-    top: @heroSize;
-    bottom: auto;
-    height: @toolbarSize;
-}
-
-section.layout-area {
-    padding-top: @heroSize;
-    min-height: 100%;
     position: relative;
 }
 
-section.layout-content {
-    top: @heroSize + @toolbarSize + 2px;
-    padding: 10px;
-    text-align: center;
-    overflow: auto;
+section.toolbar {
+    height: @toolbarSize;
+    position: relative;
 }
 
-section.layout-toolbar, section.layout-header {
+section.content {
+    padding: 10px;
+    text-align: center;
+}
+
+section.toolbar, section.layout-header {
     font-size: 24px;
 }
 
-section.layout-top, section.layout-toolbar {
+section.layout-top, section.toolbar {
     border-bottom: 1px solid @tintColor;
     border-top: 1px solid @tintColor;
     overflow: visible;
@@ -59,8 +42,6 @@ section.layout-top, section.layout-toolbar {
 @time: 0.3s;
 
 section.layout-menu {
-    .gpu();
-
     &.active {
         opacity: 0;
         transition: opacity ease-out @time;
@@ -73,8 +54,6 @@ section.layout-menu {
 }
 
 section.layout-modal {
-    .gpu();
-
     &.active {
         opacity: 0;
         transition: opacity ease-out @time;
@@ -86,8 +65,6 @@ section.layout-modal {
 }
 
 section.layout-menu-content {
-    .gpu();
-
     transform: translate3d(0, -10px, 0);
     transition: transform ease-out @time;
 
@@ -97,8 +74,6 @@ section.layout-menu-content {
 }
 
 section.layout-modal-content {
-    .gpu();
-
     transform: translate3d(0, 20px, 0) scale(0.95);
     transition: transform ease-out @time;
 
